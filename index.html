@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Yasmin ❤️</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #ff758c, #ff7eb3, #c471ed);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+    }
+
+    .card {
+        width: 90%;
+        max-width: 500px;
+        padding: 40px 25px;
+        text-align: center;
+        background: rgba(255,255,255,0.18);
+        backdrop-filter: blur(12px);
+        border-radius: 30px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        z-index: 2;
+    }
+
+    h1 {
+        font-size: 42px;
+        margin: 10px 0;
+    }
+
+    p {
+        font-size: 20px;
+        line-height: 1.6;
+    }
+
+    .heart {
+        font-size: 70px;
+        animation: beat 1s infinite;
+    }
+
+    button {
+        border: none;
+        padding: 15px 25px;
+        border-radius: 30px;
+        background: white;
+        color: #ff4f81;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 15px;
+    }
+
+    button:hover {
+        transform: scale(1.05);
+    }
+
+    #surprise {
+        display: none;
+        margin-top: 20px;
+        font-size: 24px;
+    }
+
+    .floating {
+        position: absolute;
+        bottom: -50px;
+        animation: floatUp linear infinite;
+        opacity: 0.8;
+    }
+
+    @keyframes beat {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.25); }
+    }
+
+    @keyframes floatUp {
+        from {
+            transform: translateY(0) rotate(0deg);
+            opacity: 0.8;
+        }
+        to {
+            transform: translateY(-110vh) rotate(360deg);
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <div class="heart">❤️</div>
+
+    <h1>Yasmin 💕</h1>
+
+    <p>
+        Hey beautiful 🥹❤️
+        <br><br>
+        I just wanted to remind you that you mean so much to me.
+        💗
+        <br><br>
+        You make my days brighter, my heart happier,
+        and my world a little more beautiful. 🌹✨
+    </p>
+
+    <button onclick="showLove()">Tap for a surprise 💌</button>
+
+    <div id="surprise">
+        I LOVE YOU YASMIN ❤️🥹🫶🏽💋
+        <br><br>
+        💕 Forever my favorite person 💕
+    </div>
+</div>
+
+<script>
+function showLove() {
+    document.getElementById("surprise").style.display = "block";
+
+    for (let i = 0; i < 25; i++) {
+        createHeart();
+    }
+}
+
+function createHeart() {
+    const heart = document.createElement("div");
+
+    const emojis = ["❤️","💕","💖","💗","💓","💘","💋","🥰","🌹","🫶🏽"];
+    heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+
+    heart.className = "floating";
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (20 + Math.random() * 35) + "px";
+    heart.style.animationDuration = (3 + Math.random() * 5) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 8000);
+}
+
+// Create hearts continuously
+setInterval(createHeart, 700);
+</script>
+
+</body>
+</html>
