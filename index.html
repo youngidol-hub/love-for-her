@@ -1,163 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Important Question 😂</title>
-
-<style>
-    * {
-        box-sizing: border-box;
-    }
-
-    body {
-        margin: 0;
-        min-height: 100vh;
-        font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        color: white;
-    }
-
-    .card {
-        width: 90%;
-        max-width: 500px;
-        padding: 40px 25px;
-        text-align: center;
-        background: rgba(255,255,255,0.18);
-        backdrop-filter: blur(12px);
-        border-radius: 30px;
-        box-shadow: 0 15px 50px rgba(0,0,0,0.25);
-    }
-
-    .emoji {
-        font-size: 70px;
-    }
-
-    h1 {
-        font-size: 28px;
-        line-height: 1.4;
-    }
-
-    p {
-        font-size: 18px;
-    }
-
-    .buttons {
-        position: relative;
-        height: 130px;
-        margin-top: 25px;
-    }
-
-    button {
-        border: none;
-        padding: 15px 28px;
-        border-radius: 30px;
-        font-size: 18px;
-        font-weight: bold;
-        cursor: pointer;
-    }
-
-    #yes {
-        background: #00e676;
-        color: white;
-    }
-
-    #no {
-        background: #ff1744;
-        color: white;
-        position: absolute;
-        left: 55%;
-        top: 20px;
-        transition: 0.2s;
-    }
-
-    #result {
-        display: none;
-        font-size: 25px;
-        margin-top: 20px;
-        animation: pop 0.5s ease;
-    }
-
-    #exit {
-        display: none;
-        margin-top: 20px;
-        background: white;
-        color: #764ba2;
-    }
-
-    .floating {
-        position: fixed;
-        bottom: -50px;
-        pointer-events: none;
-        animation: floatUp 4s linear forwards;
-    }
-
-    @keyframes floatUp {
-        to {
-            transform: translateY(-110vh) rotate(360deg);
-            opacity: 0;
-        }
-    }
-
-    @keyframes pop {
-        0% { transform: scale(0); }
-        100% { transform: scale(1); }
-    }
-</style>
-</head>
-
-<body>
-
-<div class="card">
-
-    <div class="emoji">🤨</div>
-
-    <h1>
-        IMPORTANT QUESTION 😂
-    </h1>
-
-    <p>
-        Be honest...<br><br>
-        ARE YOU GAY? 😎
-    </p>
-
-    <div class="buttons">
-
-        <button id="yes" onclick="yesClicked()">
-            YES 😎
-        </button>
-
-        <button id="no">
-            NO 💀
-        </button>
-
-    </div>
-
-    <div id="result">
-        😂😂 I KNEW IT!<br><br>
-        You finally admitted you're cool! 🏆😎
-    </div>
-
-    <button id="exit" onclick="location.reload()">
-        Play Again 😂
-    </button>
-
-</div>
-
 <script>
-
 const noButton = document.getElementById("no");
-   const laugh = new Audio("laugh.mp3");
+const laugh = new Audio("./laugh.mp3");
 
 function moveNoButton() {
+    // Play the laugh
+    laugh.currentTime = 0;
+    laugh.play().catch(error => {
+        console.log("Sound could not play:", error);
+    });
 
-    const maxX = window.innerWidth - noButton.offsetWidth - 10;
-    const maxY = window.innerHeight - noButton.offsetHeight - 10;
+    // Move the NO button
+    const maxX = window.innerWidth - noButton.offsetWidth - 20;
+    const maxY = window.innerHeight - noButton.offsetHeight - 20;
 
     const x = Math.max(10, Math.random() * maxX);
     const y = Math.max(10, Math.random() * maxY);
@@ -167,7 +21,7 @@ function moveNoButton() {
     noButton.style.top = y + "px";
 }
 
-// Desktop
+// Computer
 noButton.addEventListener("mouseenter", moveNoButton);
 
 // Phone
@@ -177,7 +31,6 @@ noButton.addEventListener("touchstart", function(e) {
 });
 
 function yesClicked() {
-
     document.getElementById("result").style.display = "block";
     document.getElementById("exit").style.display = "inline-block";
 
@@ -189,7 +42,6 @@ function yesClicked() {
 }
 
 function createEmoji() {
-
     const emoji = document.createElement("div");
 
     const emojis = [
@@ -217,40 +69,4 @@ function createEmoji() {
         emoji.remove();
     }, 5000);
 }
-
-</script><script>
-const noButton = document.getElementById("no");
-
-// Laughing sound
-const laugh = new Audio("laugh.mp3");
-
-function moveNoButton() {
-
-    // Play laugh 😂
-    laugh.currentTime = 0;
-    laugh.play();
-
-    const maxX = window.innerWidth - noButton.offsetWidth - 10;
-    const maxY = window.innerHeight - noButton.offsetHeight - 10;
-
-    const x = Math.max(10, Math.random() * maxX);
-    const y = Math.max(10, Math.random() * maxY);
-
-    noButton.style.position = "fixed";
-    noButton.style.left = x + "px";
-    noButton.style.top = y + "px";
-}
-
-// Computer
-noButton.addEventListener("mouseenter", moveNoButton);
-
-// Phone
-noButton.addEventListener("touchstart", function(e) {
-    e.preventDefault();
-    moveNoButton();
-});
 </script>
-
-
-</body>
-</html>
