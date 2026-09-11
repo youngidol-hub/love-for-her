@@ -14,12 +14,12 @@
 body {
     margin: 0;
     min-height: 100vh;
+    overflow: hidden;
     font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #667eea, #764ba2);
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
     color: white;
 }
 
@@ -40,11 +40,11 @@ body {
 
 h1 {
     font-size: 28px;
-    line-height: 1.4;
 }
 
 p {
-    font-size: 18px;
+    font-size: 20px;
+    line-height: 1.5;
 }
 
 .buttons {
@@ -80,10 +80,9 @@ button {
     display: none;
     font-size: 25px;
     margin-top: 20px;
-    animation: pop 0.5s ease;
 }
 
-#exit {
+#again {
     display: none;
     margin-top: 20px;
     background: white;
@@ -101,16 +100,6 @@ button {
     to {
         transform: translateY(-110vh) rotate(360deg);
         opacity: 0;
-    }
-}
-
-@keyframes pop {
-    0% {
-        transform: scale(0);
-    }
-
-    100% {
-        transform: scale(1);
     }
 }
 </style>
@@ -146,7 +135,7 @@ button {
         You finally admitted it! 🏆😎
     </div>
 
-    <button id="exit" onclick="location.reload()">
+    <button id="again" onclick="location.reload()">
         Play Again 😂
     </button>
 
@@ -155,18 +144,24 @@ button {
 <script>
 
 const noButton = document.getElementById("no");
+
+// Your audio file must be named laugh.mp3
 const laugh = new Audio("./laugh.mp3");
 
-function moveNoButton() {
-
-    // Play laugh
+function playLaugh() {
     laugh.currentTime = 0;
 
     laugh.play().catch(function(error) {
-        console.log("Sound blocked:", error);
+        console.log("Audio could not play:", error);
     });
+}
 
-    // Move the NO button
+function moveNoButton() {
+
+    // Laugh when NO is attempted
+    playLaugh();
+
+    // Find a random position
     const maxX = window.innerWidth - noButton.offsetWidth - 20;
     const maxY = window.innerHeight - noButton.offsetHeight - 20;
 
@@ -190,11 +185,11 @@ noButton.addEventListener("touchstart", function(event) {
 function yesClicked() {
 
     document.getElementById("result").style.display = "block";
-
-    document.getElementById("exit").style.display = "inline-block";
+    document.getElementById("again").style.display = "inline-block";
 
     noButton.style.display = "none";
 
+    // Celebration emojis
     for (let i = 0; i < 50; i++) {
         createEmoji();
     }
