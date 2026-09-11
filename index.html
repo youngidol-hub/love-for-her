@@ -14,12 +14,12 @@
 body {
     margin: 0;
     min-height: 100vh;
-    overflow: hidden;
     font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #667eea, #764ba2);
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
     color: white;
 }
 
@@ -40,11 +40,11 @@ body {
 
 h1 {
     font-size: 28px;
+    line-height: 1.4;
 }
 
 p {
-    font-size: 20px;
-    line-height: 1.5;
+    font-size: 18px;
 }
 
 .buttons {
@@ -80,9 +80,10 @@ button {
     display: none;
     font-size: 25px;
     margin-top: 20px;
+    animation: pop 0.5s ease;
 }
 
-#again {
+#exit {
     display: none;
     margin-top: 20px;
     background: white;
@@ -102,6 +103,16 @@ button {
         opacity: 0;
     }
 }
+
+@keyframes pop {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
 </style>
 </head>
 
@@ -114,8 +125,8 @@ button {
     <h1>IMPORTANT QUESTION 😂</h1>
 
     <p>
-        Msione nko shule bure 😂😂Be honest...<br><br>
-        ARE YOU STUPID KATERINA? 😂
+       Msione nko shule bure😂😂😂 Be honest...<br><br>
+        ARE YOU STUPID? 😎😂😂😂
     </p>
 
     <div class="buttons">
@@ -132,10 +143,10 @@ button {
 
     <div id="result">
         😂😂 I KNEW IT!<br><br>
-        You finally admitted it! 🏆😎
+        You finally admitted it! 🏆😎 love you my love
     </div>
 
-    <button id="again" onclick="location.reload()">
+    <button id="exit" onclick="location.reload()">
         Play Again 😂
     </button>
 
@@ -144,24 +155,18 @@ button {
 <script>
 
 const noButton = document.getElementById("no");
-
-// Your audio file must be named laugh.mp3
 const laugh = new Audio("./laugh.mp3");
-
-function playLaugh() {
-    laugh.currentTime = 0;
-
-    laugh.play().catch(function(error) {
-        console.log("Audio could not play:", error);
-    });
-}
 
 function moveNoButton() {
 
-    // Laugh when NO is attempted
-    playLaugh();
+    // Play laugh
+    laugh.currentTime = 0;
 
-    // Find a random position
+    laugh.play().catch(function(error) {
+        console.log("Sound blocked:", error);
+    });
+
+    // Move the NO button
     const maxX = window.innerWidth - noButton.offsetWidth - 20;
     const maxY = window.innerHeight - noButton.offsetHeight - 20;
 
@@ -185,11 +190,11 @@ noButton.addEventListener("touchstart", function(event) {
 function yesClicked() {
 
     document.getElementById("result").style.display = "block";
-    document.getElementById("again").style.display = "inline-block";
+
+    document.getElementById("exit").style.display = "inline-block";
 
     noButton.style.display = "none";
 
-    // Celebration emojis
     for (let i = 0; i < 50; i++) {
         createEmoji();
     }
