@@ -122,9 +122,7 @@ button {
 
     <div class="emoji">🤨</div>
 
-    <h1>
-        IMPORTANT QUESTION 😂
-    </h1>
+    <h1>IMPORTANT QUESTION 😂</h1>
 
     <p>
         Be honest...<br><br>
@@ -159,18 +157,16 @@ button {
 const noButton = document.getElementById("no");
 const laugh = new Audio("./laugh.mp3");
 
-function playLaugh() {
+function moveNoButton() {
+
+    // Play laugh
     laugh.currentTime = 0;
 
     laugh.play().catch(function(error) {
         console.log("Sound blocked:", error);
     });
-}
 
-function moveNoButton() {
-
-    playLaugh();
-
+    // Move the NO button
     const maxX = window.innerWidth - noButton.offsetWidth - 20;
     const maxY = window.innerHeight - noButton.offsetHeight - 20;
 
@@ -182,10 +178,10 @@ function moveNoButton() {
     noButton.style.top = y + "px";
 }
 
-/* Computer */
+// Computer
 noButton.addEventListener("mouseenter", moveNoButton);
 
-/* Phone */
+// Phone
 noButton.addEventListener("touchstart", function(event) {
     event.preventDefault();
     moveNoButton();
