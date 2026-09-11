@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Yasmin ❤️</title>
+
+<title>Important Question 😂</title>
 
 <style>
     * {
@@ -13,12 +14,12 @@
     body {
         margin: 0;
         min-height: 100vh;
-        overflow: hidden;
         font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #ff758c, #ff7eb3, #c471ed);
+        background: linear-gradient(135deg, #667eea, #764ba2);
         display: flex;
         justify-content: center;
         align-items: center;
+        overflow: hidden;
         color: white;
     }
 
@@ -30,68 +31,82 @@
         background: rgba(255,255,255,0.18);
         backdrop-filter: blur(12px);
         border-radius: 30px;
-        box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-        z-index: 2;
+        box-shadow: 0 15px 50px rgba(0,0,0,0.25);
+    }
+
+    .emoji {
+        font-size: 70px;
     }
 
     h1 {
-        font-size: 42px;
-        margin: 10px 0;
+        font-size: 28px;
+        line-height: 1.4;
     }
 
     p {
-        font-size: 20px;
-        line-height: 1.6;
+        font-size: 18px;
     }
 
-    .heart {
-        font-size: 70px;
-        animation: beat 1s infinite;
+    .buttons {
+        position: relative;
+        height: 130px;
+        margin-top: 25px;
     }
 
     button {
         border: none;
-        padding: 15px 25px;
+        padding: 15px 28px;
         border-radius: 30px;
-        background: white;
-        color: #ff4f81;
         font-size: 18px;
         font-weight: bold;
         cursor: pointer;
-        margin-top: 15px;
     }
 
-    button:hover {
-        transform: scale(1.05);
+    #yes {
+        background: #00e676;
+        color: white;
     }
 
-    #surprise {
+    #no {
+        background: #ff1744;
+        color: white;
+        position: absolute;
+        left: 55%;
+        top: 20px;
+        transition: 0.2s;
+    }
+
+    #result {
+        display: none;
+        font-size: 25px;
+        margin-top: 20px;
+        animation: pop 0.5s ease;
+    }
+
+    #exit {
         display: none;
         margin-top: 20px;
-        font-size: 24px;
+        background: white;
+        color: #764ba2;
     }
 
     .floating {
-        position: absolute;
+        position: fixed;
         bottom: -50px;
-        animation: floatUp linear infinite;
-        opacity: 0.8;
-    }
-
-    @keyframes beat {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.25); }
+        pointer-events: none;
+        animation: floatUp 4s linear forwards;
     }
 
     @keyframes floatUp {
-        from {
-            transform: translateY(0) rotate(0deg);
-            opacity: 0.8;
-        }
         to {
             transform: translateY(-110vh) rotate(360deg);
             opacity: 0;
         }
+    }
+
+    @keyframes pop {
+        0% { transform: scale(0); }
+        100% { transform: scale(1); }
     }
 </style>
 </head>
@@ -99,60 +114,142 @@
 <body>
 
 <div class="card">
-    <div class="heart">❤️</div>
 
-    <h1>Yasmin 💕</h1>
+    <div class="emoji">🤨</div>
+
+    <h1>
+        IMPORTANT QUESTION 😂
+    </h1>
 
     <p>
-        Hey beautiful 🥹❤️
-        <br><br>
-        I just wanted to remind you that you mean so much to me.
-        💗
-        <br><br>
-        You make my days brighter, my heart happier,
-        and my world a little more beautiful. 🌹✨
+        Be honest...<br><br>
+        ARE YOU GAY? 😎
     </p>
 
-    <button onclick="showLove()">Tap for a surprise 💌</button>
+    <div class="buttons">
 
-    <div id="surprise">
-        I LOVE YOU YASMIN ❤️🥹🫶🏽💋
-        <br><br>
-        💕 Forever my favorite person 💕
+        <button id="yes" onclick="yesClicked()">
+            YES 😎
+        </button>
+
+        <button id="no">
+            NO 💀
+        </button>
+
     </div>
+
+    <div id="result">
+        😂😂 I KNEW IT!<br><br>
+        You finally admitted you're cool! 🏆😎
+    </div>
+
+    <button id="exit" onclick="location.reload()">
+        Play Again 😂
+    </button>
+
 </div>
 
 <script>
-function showLove() {
-    document.getElementById("surprise").style.display = "block";
 
-    for (let i = 0; i < 25; i++) {
-        createHeart();
+const noButton = document.getElementById("no");
+
+function moveNoButton() {
+
+    const maxX = window.innerWidth - noButton.offsetWidth - 10;
+    const maxY = window.innerHeight - noButton.offsetHeight - 10;
+
+    const x = Math.max(10, Math.random() * maxX);
+    const y = Math.max(10, Math.random() * maxY);
+
+    noButton.style.position = "fixed";
+    noButton.style.left = x + "px";
+    noButton.style.top = y + "px";
+}
+
+// Desktop
+noButton.addEventListener("mouseenter", moveNoButton);
+
+// Phone
+noButton.addEventListener("touchstart", function(e) {
+    e.preventDefault();
+    moveNoButton();
+});
+
+function yesClicked() {
+
+    document.getElementById("result").style.display = "block";
+    document.getElementById("exit").style.display = "inline-block";
+
+    noButton.style.display = "none";
+
+    for (let i = 0; i < 50; i++) {
+        createEmoji();
     }
 }
 
-function createHeart() {
-    const heart = document.createElement("div");
+function createEmoji() {
 
-    const emojis = ["❤️","💕","💖","💗","💓","💘","💋","🥰","🌹","🫶🏽"];
-    heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+    const emoji = document.createElement("div");
 
-    heart.className = "floating";
+    const emojis = [
+        "😂","🤣","😎","🔥","🎉",
+        "🏆","💀","👏","✨","🤨"
+    ];
 
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (20 + Math.random() * 35) + "px";
-    heart.style.animationDuration = (3 + Math.random() * 5) + "s";
+    emoji.innerHTML =
+        emojis[Math.floor(Math.random() * emojis.length)];
 
-    document.body.appendChild(heart);
+    emoji.className = "floating";
+
+    emoji.style.left =
+        Math.random() * 100 + "vw";
+
+    emoji.style.fontSize =
+        (20 + Math.random() * 35) + "px";
+
+    emoji.style.animationDuration =
+        (2 + Math.random() * 3) + "s";
+
+    document.body.appendChild(emoji);
 
     setTimeout(() => {
-        heart.remove();
-    }, 8000);
+        emoji.remove();
+    }, 5000);
 }
 
-// Create hearts continuously
-setInterval(createHeart, 700);
+</script><script>
+const noButton = document.getElementById("no");
+
+// Laughing sound
+const laugh = new Audio("laugh.mp3");
+
+function moveNoButton() {
+
+    // Play laugh 😂
+    laugh.currentTime = 0;
+    laugh.play();
+
+    const maxX = window.innerWidth - noButton.offsetWidth - 10;
+    const maxY = window.innerHeight - noButton.offsetHeight - 10;
+
+    const x = Math.max(10, Math.random() * maxX);
+    const y = Math.max(10, Math.random() * maxY);
+
+    noButton.style.position = "fixed";
+    noButton.style.left = x + "px";
+    noButton.style.top = y + "px";
+}
+
+// Computer
+noButton.addEventListener("mouseenter", moveNoButton);
+
+// Phone
+noButton.addEventListener("touchstart", function(e) {
+    e.preventDefault();
+    moveNoButton();
+});
 </script>
+
 
 </body>
 </html>
